@@ -41,12 +41,46 @@ namespace IsaacsSuitcase
             var saveLocation = GetModSaveLocation();
             File.Delete("IsaacSuitcase.save");
             ZipFile.CreateFromDirectory(saveLocation, "IsaacSuitcase.save");
-
+            Finish();
         }
 
         static void Inject()
         {
+            if (File.Exists("./IsaacSuitcase.save"))
+            {
+                Console.WriteLine("IsaacSuitcase.save found.");
+			} else
+			{
+                Console.WriteLine("IsaacSuitcase.save not found!");
+                Abort();
+            }
+            var saveLocation = GetModSaveLocation();
+            Console.WriteLine(FiggleFonts.CyberMedium.Render("This will overwrite"));
+            Console.WriteLine(FiggleFonts.CyberMedium.Render("your current save data"));
+            Console.WriteLine(FiggleFonts.CyberMedium.Render("for all of your mods"));
+            Console.Write("Are you sure? [Y/N]>");
+            if (Console.ReadLine().ToUpper() == "Y")
+            {
+                Directory.Delete(saveLocation, true);
+                ZipFile.ExtractToDirectory("IsaacSuitcase.save", saveLocation);
+                Finish();
+            } else
+			{
+                Abort();
+			}
+        }
 
+        static void Abort()
+        {
+            Console.WriteLine("Aborted. Press any key to exit");
+            Console.ReadKey();
+            Environment.Exit(0);
+        }
+        static void Finish()
+        {
+            Console.WriteLine("Operation finished. Press any key to exit");
+            Console.ReadKey();
+            Environment.Exit(0);
         }
     }
 }
