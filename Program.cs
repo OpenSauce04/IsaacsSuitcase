@@ -43,7 +43,7 @@ namespace IsaacsSuitcase
         static void ResetModSaveLocation()
 		{
             var pathFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "IsaacsSuitcase.path");
-            Console.Write("Input the location of your data folder\n>");
+            Console.Write("Input the location of \"data\" folder inside your Isaac folder\n>");
             var savePath = Console.ReadLine();
 #pragma warning disable CS8604 // Possible null reference argument.
 			while (!CheckModSaveLocation(savePath))
@@ -64,7 +64,7 @@ namespace IsaacsSuitcase
                 return File.ReadAllText(pathFile);
             }
             // File does not exist
-            Console.Write("Input the location of your data folder (you only need to do this once)\n>");
+            Console.Write("Input the location of \"data\" folder inside your Isaac folder (you only need to do this once)\n>");
             var savePath = Console.ReadLine();
 #pragma warning disable CS8604 // Possible null reference argument.
 			while (!CheckModSaveLocation(savePath))
