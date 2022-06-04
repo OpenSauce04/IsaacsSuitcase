@@ -29,11 +29,18 @@ namespace IsaacsSuitcase
                     goto selectionLoop;
             }
         }
-        
+
         static String GetModSaveLocation()
-		{
-            Console.Write("Input the location of your data folder>");
-            return Console.ReadLine();
+        {
+            var pathFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "IsaacsSuitcase.path");
+            if (File.Exists(pathFile)) {
+                return File.ReadAllText(pathFile);
+            }
+            // File does not exist
+            Console.Write("Input the location of your data folder (you only need to do this once)>");
+            var savePath = Console.ReadLine();
+            File.WriteAllTextAsync(pathFile, savePath);
+            return savePath;
 		}
 
         static void Extract()
