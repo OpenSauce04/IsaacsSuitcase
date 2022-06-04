@@ -81,6 +81,7 @@ namespace IsaacsSuitcase
         static void Extract()
         {
             var saveLocation = GetModSaveLocation();
+            Console.WriteLine("Extracting to ./IsaacSuitcase.save...");
             File.Delete("IsaacSuitcase.save");
             ZipFile.CreateFromDirectory(saveLocation, "IsaacSuitcase.save");
             Finish();
@@ -103,6 +104,7 @@ namespace IsaacsSuitcase
             Console.Write("Are you sure? [Y/N]>");
             if (Console.ReadLine().ToUpper() == "Y")
             {
+                Console.WriteLine("Injecting mod saves from ./IsaacSuitcase.save...");
                 Directory.Delete(saveLocation, true);
                 ZipFile.ExtractToDirectory("IsaacSuitcase.save", saveLocation);
                 Finish();
@@ -120,7 +122,7 @@ namespace IsaacsSuitcase
         }
         static void Finish()
         {
-            Console.WriteLine("Operation finished. Press any key to exit");
+            Console.WriteLine("Finished. Press any key to exit");
             Console.ReadKey();
             Environment.Exit(0);
         }
