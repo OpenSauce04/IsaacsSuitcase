@@ -15,6 +15,7 @@ namespace IsaacsSuitcase
             Console.WriteLine(FiggleFonts.Ivrit.Render("Isaac's Suitcase"));
             Console.WriteLine("1: Extract save");
             Console.WriteLine("2: Inject save");
+            Console.WriteLine("3: Reset data location");
             Console.Write(">");
             var input = Console.ReadLine();
             switch(input)
@@ -25,9 +26,20 @@ namespace IsaacsSuitcase
                 case "2":
                     Inject();
                     break;
+                case "3":
+                    ResetModSaveLocation();
+                    break;
                 default:
                     goto selectionLoop;
             }
+        }
+        static void ResetModSaveLocation()
+		{
+            var pathFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "IsaacsSuitcase.path");
+            Console.Write("Input the location of your data folder>");
+            var savePath = Console.ReadLine();
+            File.WriteAllTextAsync(pathFile, savePath);
+            Finish();
         }
 
         static String GetModSaveLocation()
