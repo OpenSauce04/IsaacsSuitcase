@@ -33,12 +33,27 @@ namespace IsaacsSuitcase
                     goto selectionLoop;
             }
         }
+        static Boolean CheckModSaveLocation(String location)
+		{
+            if (File.Exists(Path.Combine(location, "../isaac-ng.exe"))) {
+                return true;
+            }
+            return false;
+		}
         static void ResetModSaveLocation()
 		{
             var pathFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "IsaacsSuitcase.path");
-            Console.Write("Input the location of your data folder>");
+            Console.Write("Input the location of your data folder\n>");
             var savePath = Console.ReadLine();
-            File.WriteAllTextAsync(pathFile, savePath);
+#pragma warning disable CS8604 // Possible null reference argument.
+			while (!CheckModSaveLocation(savePath))
+			{
+                Console.WriteLine("Path is invalid, please try again");
+                Console.Write(">");
+                savePath = Console.ReadLine();
+            }
+#pragma warning restore CS8604 // Possible null reference argument.
+			File.WriteAllTextAsync(pathFile, savePath);
             Finish();
         }
 
@@ -49,9 +64,17 @@ namespace IsaacsSuitcase
                 return File.ReadAllText(pathFile);
             }
             // File does not exist
-            Console.Write("Input the location of your data folder (you only need to do this once)>");
+            Console.Write("Input the location of your data folder (you only need to do this once)\n>");
             var savePath = Console.ReadLine();
-            File.WriteAllTextAsync(pathFile, savePath);
+#pragma warning disable CS8604 // Possible null reference argument.
+			while (!CheckModSaveLocation(savePath))
+            {
+                Console.WriteLine("Path is invalid, please try again");
+                Console.Write(">");
+                savePath = Console.ReadLine();
+            }
+#pragma warning restore CS8604 // Possible null reference argument.
+			File.WriteAllTextAsync(pathFile, savePath);
             return savePath;
 		}
 
