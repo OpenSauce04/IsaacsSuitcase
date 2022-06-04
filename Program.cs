@@ -94,7 +94,7 @@ namespace IsaacsSuitcase
                 Console.WriteLine("IsaacSuitcase.save found.");
 			} else
 			{
-                Console.WriteLine("IsaacSuitcase.save not found!");
+                Console.WriteLine("IsaacSuitcase.save not found!\nPlease either place the file in the same directory as this program and/or use the Extract function to obtain the file from the machine you want to transfer your save from");
                 Abort();
             }
             var saveLocation = GetModSaveLocation();
