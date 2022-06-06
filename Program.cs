@@ -13,18 +13,18 @@ namespace IsaacsSuitcase
             selectionLoop:
             Console.Clear();
             Console.WriteLine(FiggleFonts.Ivrit.Render("Isaac's Suitcase"));
-            Console.WriteLine("1: Extract save");
-            Console.WriteLine("2: Inject save");
+            Console.WriteLine("1: Backup save");
+            Console.WriteLine("2: Restore save");
             Console.WriteLine("3: Reset data location");
             Console.Write(">");
             var input = Console.ReadLine();
             switch(input)
             {
                 case "1":
-                    Extract();
+                    Backup();
                     break;
                 case "2":
-                    Inject();
+                    Restore();
                     break;
                 case "3":
                     ResetModSaveLocation();
@@ -78,7 +78,7 @@ namespace IsaacsSuitcase
             return savePath;
 		}
 
-        static void Extract()
+        static void Backup()
         {
             var saveLocation = GetModSaveLocation();
             Console.WriteLine("Extracting to ./IsaacSuitcase.save...");
@@ -87,7 +87,7 @@ namespace IsaacsSuitcase
             Finish();
         }
 
-        static void Inject()
+        static void Restore()
         {
             if (File.Exists("./IsaacSuitcase.save"))
             {
