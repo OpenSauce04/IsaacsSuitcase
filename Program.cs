@@ -15,7 +15,7 @@ namespace IsaacsSuitcase
         selectionLoop:
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("v1.0 | Written by OpenSauce");
+            Console.WriteLine("v1.0.1 | Written by OpenSauce");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(FiggleFonts.Ivrit.Render("Isaac's Suitcase"));
             Console.ForegroundColor = ConsoleColor.White;
@@ -129,7 +129,7 @@ namespace IsaacsSuitcase
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("IsaacSuitcase.isave not found!");
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Please either place the file in the same directory as this program and/or use the Extract function to obtain the file from the computer you want to transfer your save from.");
+                Console.WriteLine("Please either place the file in the same directory as this program and/or use the Backup function to obtain the file from the computer you want to transfer your save from.");
                 Console.ForegroundColor = ConsoleColor.White;
                 Abort();
             }
