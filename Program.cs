@@ -9,7 +9,7 @@ namespace IsaacsSuitcase
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
 
         selectionLoop:
@@ -58,7 +58,12 @@ namespace IsaacsSuitcase
                 savePath = Console.ReadLine();
             }
             File.WriteAllTextAsync(pathFile, savePath);
-            Finish();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Finished.");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(" Press any key to restart the program");
+            Console.ReadKey();
+            Main();
         }
 
         static String GetModSaveLocation()
