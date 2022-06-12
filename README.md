@@ -5,4 +5,6 @@
 
 A mod save data backup and migration tool for The Binding of Isaac: Repentance
 
+Tested on both Windows and Linux (Manjaro)
+
 Built using Visual Studio 2022 + .NET 6.0
