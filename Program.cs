@@ -20,7 +20,7 @@ namespace IsaacsSuitcase
             Console.WriteLine("3: Reset data location");
             Console.Write(">");
             var input = Console.ReadLine();
-            switch(input)
+            switch (input)
             {
                 case "1":
                     Backup();
@@ -36,20 +36,20 @@ namespace IsaacsSuitcase
             }
         }
         static Boolean CheckModSaveLocation(String location)
-		{
+        {
             if (File.Exists(Path.Combine(location, "../isaac-ng.exe"))) {
                 return true;
             }
             return false;
-		}
+        }
         static void ResetModSaveLocation()
-		{
+        {
             var pathFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "IsaacsSuitcase.path");
             Console.Write("Input the location of \"data\" folder inside your Isaac folder\n>");
             var savePath = Console.ReadLine();
 #pragma warning disable CS8604 // Possible null reference argument.
-			while (!CheckModSaveLocation(savePath))
-			{
+            while (!CheckModSaveLocation(savePath))
+            {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Path is invalid, please try again");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -57,7 +57,7 @@ namespace IsaacsSuitcase
                 savePath = Console.ReadLine();
             }
 #pragma warning restore CS8604 // Possible null reference argument.
-			File.WriteAllTextAsync(pathFile, savePath);
+            File.WriteAllTextAsync(pathFile, savePath);
             Finish();
         }
 
@@ -71,19 +71,28 @@ namespace IsaacsSuitcase
             Console.Write("Input the location of \"data\" folder inside your Isaac folder (you only need to do this once per computer)\n>");
             var savePath = Console.ReadLine();
 #pragma warning disable CS8604 // Possible null reference argument.
-			while (!CheckModSaveLocation(savePath))
+            while (!CheckModSaveLocation(savePath))
             {
                 Console.WriteLine("Path is invalid, please try again");
                 Console.Write(">");
                 savePath = Console.ReadLine();
             }
 #pragma warning restore CS8604 // Possible null reference argument.
-			File.WriteAllTextAsync(pathFile, savePath);
+            File.WriteAllTextAsync(pathFile, savePath);
             return savePath;
-		}
+        }
 
         static void Backup()
         {
+            if (File.Exists("./IsaacSuitcase.save"))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nThis will overwrite the existing backup currently stored in ./IsaacSuitcase.save");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("Are you sure? [Y/N]>");
+                if (!YN())
+                { Abort(); }
+            }
             var saveLocation = GetModSaveLocation();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Extracting mod save files to ./IsaacSuitcase.save...");
@@ -91,6 +100,13 @@ namespace IsaacsSuitcase
             File.Delete("IsaacSuitcase.save");
             ZipFile.CreateFromDirectory(saveLocation, "IsaacSuitcase.save");
             Finish();
+        }
+
+        static Boolean YN() {
+            if (Console.ReadLine().ToUpper() == "Y") {
+                return true;
+            }
+            return false;
         }
 
         static void Restore()
@@ -116,7 +132,7 @@ namespace IsaacsSuitcase
             Console.WriteLine(FiggleFonts.CyberMedium.Render("for all of your mods"));
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Are you sure? [Y/N]>");
-            if (Console.ReadLine().ToUpper() == "Y")
+            if (YN())
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Injecting mod save files from ./IsaacSuitcase.save...");
