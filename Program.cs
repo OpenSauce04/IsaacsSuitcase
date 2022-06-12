@@ -14,6 +14,8 @@ namespace IsaacsSuitcase
 
         selectionLoop:
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("v0.3a | Written by OpenSauce");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(FiggleFonts.Ivrit.Render("Isaac's Suitcase"));
             Console.ForegroundColor = ConsoleColor.White;
