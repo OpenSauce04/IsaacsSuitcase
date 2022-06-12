@@ -15,7 +15,7 @@ namespace IsaacsSuitcase
         selectionLoop:
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("v0.3a | Written by OpenSauce");
+            Console.WriteLine("v0.4 | Written by OpenSauce");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(FiggleFonts.Ivrit.Render("Isaac's Suitcase"));
             Console.ForegroundColor = ConsoleColor.White;
@@ -92,10 +92,10 @@ namespace IsaacsSuitcase
 
         static void Backup()
         {
-            if (File.Exists("./IsaacSuitcase.save"))
+            if (File.Exists("./IsaacSuitcase.isave"))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\nThis will overwrite the existing backup currently stored in ./IsaacSuitcase.save");
+                Console.WriteLine("\nThis will overwrite the existing backup currently stored in ./IsaacSuitcase.isave");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.Write("Are you sure? [Y/N]>");
                 if (!YN())
@@ -103,10 +103,10 @@ namespace IsaacsSuitcase
             }
             var saveLocation = GetModSaveLocation();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("Extracting mod save files to ./IsaacSuitcase.save...");
+            Console.WriteLine("Extracting mod save files to ./IsaacSuitcase.isave...");
             Console.ForegroundColor = ConsoleColor.White;
-            File.Delete("IsaacSuitcase.save");
-            ZipFile.CreateFromDirectory(saveLocation, "IsaacSuitcase.save");
+            File.Delete("IsaacSuitcase.isave");
+            ZipFile.CreateFromDirectory(saveLocation, "IsaacSuitcase.isave");
             Finish();
         }
 
@@ -119,15 +119,15 @@ namespace IsaacsSuitcase
 
         static void Restore()
         {
-            if (File.Exists("./IsaacSuitcase.save"))
+            if (File.Exists("./IsaacSuitcase.isave"))
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("IsaacSuitcase.save found.");
+                Console.WriteLine("IsaacSuitcase.isave found.");
                 Console.ForegroundColor = ConsoleColor.White;
             } else
 			{
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("IsaacSuitcase.save not found!");
+                Console.WriteLine("IsaacSuitcase.isave not found!");
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Please either place the file in the same directory as this program and/or use the Extract function to obtain the file from the computer you want to transfer your save from.");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -143,10 +143,10 @@ namespace IsaacsSuitcase
             if (YN())
             {
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("Injecting mod save files from ./IsaacSuitcase.save...");
+                Console.WriteLine("Injecting mod save files from ./IsaacSuitcase.isave...");
                 Console.ForegroundColor = ConsoleColor.White;
                 Directory.Delete(saveLocation, true);
-                ZipFile.ExtractToDirectory("IsaacSuitcase.save", saveLocation);
+                ZipFile.ExtractToDirectory("IsaacSuitcase.isave", saveLocation);
                 Finish();
             } else
 			{
