@@ -10,9 +10,11 @@ namespace IsaacsSuitcase
         static void Main(string[] args)
         {
 
-            selectionLoop:
+        selectionLoop:
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(FiggleFonts.Ivrit.Render("Isaac's Suitcase"));
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("1: Backup save");
             Console.WriteLine("2: Restore save");
             Console.WriteLine("3: Reset data location");
@@ -48,7 +50,9 @@ namespace IsaacsSuitcase
 #pragma warning disable CS8604 // Possible null reference argument.
 			while (!CheckModSaveLocation(savePath))
 			{
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Path is invalid, please try again");
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.Write(">");
                 savePath = Console.ReadLine();
             }
@@ -81,7 +85,9 @@ namespace IsaacsSuitcase
         static void Backup()
         {
             var saveLocation = GetModSaveLocation();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Extracting mod save files to ./IsaacSuitcase.save...");
+            Console.ForegroundColor = ConsoleColor.White;
             File.Delete("IsaacSuitcase.save");
             ZipFile.CreateFromDirectory(saveLocation, "IsaacSuitcase.save");
             Finish();
@@ -91,20 +97,30 @@ namespace IsaacsSuitcase
         {
             if (File.Exists("./IsaacSuitcase.save"))
             {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("IsaacSuitcase.save found.");
-			} else
+                Console.ForegroundColor = ConsoleColor.White;
+            } else
 			{
-                Console.WriteLine("IsaacSuitcase.save not found!\nPlease either place the file in the same directory as this program and/or use the Extract function to obtain the file from the computer you want to transfer your save from");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("IsaacSuitcase.save not found!");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Please either place the file in the same directory as this program and/or use the Extract function to obtain the file from the computer you want to transfer your save from.");
+                Console.ForegroundColor = ConsoleColor.White;
                 Abort();
             }
             var saveLocation = GetModSaveLocation();
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(FiggleFonts.CyberMedium.Render("This will overwrite"));
             Console.WriteLine(FiggleFonts.CyberMedium.Render("your current save data"));
             Console.WriteLine(FiggleFonts.CyberMedium.Render("for all of your mods"));
+            Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Are you sure? [Y/N]>");
             if (Console.ReadLine().ToUpper() == "Y")
             {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Injecting mod save files from ./IsaacSuitcase.save...");
+                Console.ForegroundColor = ConsoleColor.White;
                 Directory.Delete(saveLocation, true);
                 ZipFile.ExtractToDirectory("IsaacSuitcase.save", saveLocation);
                 Finish();
@@ -116,13 +132,19 @@ namespace IsaacsSuitcase
 
         static void Abort()
         {
-            Console.WriteLine("Aborted. Press any key to exit");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("Aborted.");
+            Console.ForegroundColor= ConsoleColor.White;
+            Console.WriteLine(" Press any key to exit");
             Console.ReadKey();
             Environment.Exit(0);
         }
         static void Finish()
         {
-            Console.WriteLine("Finished. Press any key to exit");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Finished.");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(" Press any key to exit");
             Console.ReadKey();
             Environment.Exit(0);
         }
