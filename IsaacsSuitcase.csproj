@@ -5,7 +5,12 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ApplicationIcon>isaacsuitcase.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="isaacsuitcase.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Figgle" Version="0.4.0" />
