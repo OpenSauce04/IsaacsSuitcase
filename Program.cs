@@ -47,7 +47,10 @@ namespace IsaacsSuitcase
         static void ResetModSaveLocation()
         {
             var pathFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "IsaacsSuitcase.path");
-            Console.Write("Input the location of \"data\" folder inside your Isaac folder\n>");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Input the location of \"data\" folder inside your Isaac folder");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write(">");
             var savePath = Console.ReadLine();
             while (!CheckModSaveLocation(savePath))
             {
