@@ -19,7 +19,7 @@ namespace IsaacsSuitcase
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("1: Backup save");
             Console.WriteLine("2: Restore save");
-            Console.WriteLine("3: Reset data location");
+            Console.WriteLine("3: Reset save data location");
             Console.Write(">");
             var input = Console.ReadLine();
             switch (input)
