@@ -64,7 +64,7 @@ namespace IsaacsSuitcase
                 return File.ReadAllText(pathFile);
             }
             // File does not exist
-            Console.Write("Input the location of \"data\" folder inside your Isaac folder (you only need to do this once)\n>");
+            Console.Write("Input the location of \"data\" folder inside your Isaac folder (you only need to do this once per computer)\n>");
             var savePath = Console.ReadLine();
 #pragma warning disable CS8604 // Possible null reference argument.
 			while (!CheckModSaveLocation(savePath))
@@ -81,7 +81,7 @@ namespace IsaacsSuitcase
         static void Backup()
         {
             var saveLocation = GetModSaveLocation();
-            Console.WriteLine("Extracting to ./IsaacSuitcase.save...");
+            Console.WriteLine("Extracting mod save files to ./IsaacSuitcase.save...");
             File.Delete("IsaacSuitcase.save");
             ZipFile.CreateFromDirectory(saveLocation, "IsaacSuitcase.save");
             Finish();
@@ -94,7 +94,7 @@ namespace IsaacsSuitcase
                 Console.WriteLine("IsaacSuitcase.save found.");
 			} else
 			{
-                Console.WriteLine("IsaacSuitcase.save not found!\nPlease either place the file in the same directory as this program and/or use the Extract function to obtain the file from the machine you want to transfer your save from");
+                Console.WriteLine("IsaacSuitcase.save not found!\nPlease either place the file in the same directory as this program and/or use the Extract function to obtain the file from the computer you want to transfer your save from");
                 Abort();
             }
             var saveLocation = GetModSaveLocation();
@@ -104,7 +104,7 @@ namespace IsaacsSuitcase
             Console.Write("Are you sure? [Y/N]>");
             if (Console.ReadLine().ToUpper() == "Y")
             {
-                Console.WriteLine("Injecting mod saves from ./IsaacSuitcase.save...");
+                Console.WriteLine("Injecting mod save files from ./IsaacSuitcase.save...");
                 Directory.Delete(saveLocation, true);
                 ZipFile.ExtractToDirectory("IsaacSuitcase.save", saveLocation);
                 Finish();
