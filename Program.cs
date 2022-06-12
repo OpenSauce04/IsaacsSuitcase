@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS8604 // Possible null reference argument.
+
+using System;
 using System.IO;
 using System.IO.Compression;
 using Figgle;
@@ -47,7 +49,6 @@ namespace IsaacsSuitcase
             var pathFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "IsaacsSuitcase.path");
             Console.Write("Input the location of \"data\" folder inside your Isaac folder\n>");
             var savePath = Console.ReadLine();
-#pragma warning disable CS8604 // Possible null reference argument.
             while (!CheckModSaveLocation(savePath))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -56,7 +57,6 @@ namespace IsaacsSuitcase
                 Console.Write(">");
                 savePath = Console.ReadLine();
             }
-#pragma warning restore CS8604 // Possible null reference argument.
             File.WriteAllTextAsync(pathFile, savePath);
             Finish();
         }
@@ -70,14 +70,12 @@ namespace IsaacsSuitcase
             // File does not exist
             Console.Write("Input the location of \"data\" folder inside your Isaac folder (you only need to do this once per computer)\n>");
             var savePath = Console.ReadLine();
-#pragma warning disable CS8604 // Possible null reference argument.
             while (!CheckModSaveLocation(savePath))
             {
                 Console.WriteLine("Path is invalid, please try again");
                 Console.Write(">");
                 savePath = Console.ReadLine();
             }
-#pragma warning restore CS8604 // Possible null reference argument.
             File.WriteAllTextAsync(pathFile, savePath);
             return savePath;
         }
