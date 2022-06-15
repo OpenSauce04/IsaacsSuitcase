@@ -54,7 +54,7 @@ namespace IsaacsSuitcase
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(">");
             var savePath = Console.ReadLine();
-            while (!CheckModSaveLocation(savePath))
+            while (!Directory.Exists(savePath) && !CheckModSaveLocation(savePath))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Path is invalid, please try again");
@@ -80,7 +80,7 @@ namespace IsaacsSuitcase
             // File does not exist
             Console.Write("Input the location of \"data\" folder inside your Isaac folder (you only need to do this once per computer)\n>");
             var savePath = Console.ReadLine();
-            while (!CheckModSaveLocation(savePath))
+            while (!Directory.Exists(savePath) && !CheckModSaveLocation(savePath))
             {
                 Console.WriteLine("Path is invalid, please try again");
                 Console.Write(">");
@@ -92,6 +92,16 @@ namespace IsaacsSuitcase
 
         static void Backup()
         {
+            var saveLocation = GetModSaveLocation();
+            if (!Directory.Exists(saveLocation))
+			{
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("ERROR: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("The data folder does not exist. Try either checking that the data folder is present or resetting your data location");
+                Console.ForegroundColor = ConsoleColor.White;
+                Abort();
+			}
             if (File.Exists("./IsaacSuitcase.isave"))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -101,7 +111,6 @@ namespace IsaacsSuitcase
                 if (!YN())
                 { Abort(); }
             }
-            var saveLocation = GetModSaveLocation();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("Extracting mod save files to ./IsaacSuitcase.isave...");
             Console.ForegroundColor = ConsoleColor.White;
