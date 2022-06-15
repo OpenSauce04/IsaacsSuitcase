@@ -145,7 +145,10 @@ namespace IsaacsSuitcase
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Injecting mod save files from ./IsaacSuitcase.isave...");
                 Console.ForegroundColor = ConsoleColor.White;
-                Directory.Delete(saveLocation, true);
+                if (Directory.Exists(saveLocation))
+                {
+                    Directory.Delete(saveLocation, true);
+                }
                 ZipFile.ExtractToDirectory("IsaacSuitcase.isave", saveLocation);
                 Finish();
             } else
