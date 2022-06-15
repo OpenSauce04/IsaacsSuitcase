@@ -75,7 +75,11 @@ namespace IsaacsSuitcase
         {
             var pathFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "IsaacsSuitcase.path");
             if (File.Exists(pathFile)) {
-                return File.ReadAllText(pathFile);
+                String path = File.ReadAllText(pathFile);
+                if (CheckModSaveLocation(path))
+                {
+                    return path;
+                }
             }
             // File does not exist
             Console.Write("Input the location of \"data\" folder inside your Isaac folder (you only need to do this once per computer)\n>");
